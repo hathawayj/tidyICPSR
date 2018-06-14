@@ -1,4 +1,4 @@
-#'Parse a Stata dictionary file for use in R
+#'Parse a SAS PROC FORMAT file for use in R
 #'
 #'R cannot read SAS's setup files directly. This function parses the
 #'dictionary file to a \code{tibble} that can be used to further process
@@ -6,21 +6,16 @@
 #'
 
 
-#'@param file Stata dictionary file, most often with a \code{.dct} extension.
-#'@param names_to_lower defaults to TRUE.  If TRUE then the column names are changed to
-#' all lower case with `str_to_lower()`.
-#'@author Ananda Mahto
-#'@references \itemize{ \item Stata data types:
-#'\url{http://www.stata.com/help.cgi?datatypes} \item Stata help for
-#'fixed-format data:
-#'\url{http://www.stata.com/support/faqs/data-management/reading-fixed-format-data/}
-#'\item Initial version of function on Stack Overflow:
+#'@param file SAS Proc Format File from ICPSR, with a \code{.sas} extension.
+#'@author J. Hathaway
+#'@references \itemize{ \item SAS data types:
+#'\url{http://support.sas.com/documentation/cdl/en/fedsqlref/67364/HTML/default/viewer.htm#n19bf2z7e9p646n0z224cokuj567.htm}
 #'@examples
 #'
 #'## Read an example dictionary file
 #'
-read_sas_format <- function(file, names_to_lower = TRUE) {
-  # read in the dct file.  It is just an ASCII file.
+icpsr_sas_recode <- function(file) {
+  # read in the sas file.  It is just an ASCII file.
   temp <- read_lines(file)
 
   spformat <- temp %>% str_which("SAS PROC FORMAT;")
@@ -35,7 +30,11 @@ read_sas_format <- function(file, names_to_lower = TRUE) {
 
   # function to build lists for use with dplyr::recode
   num_to_value <- function(x){
-    map_values <- x %>% str_split("[:graph:]+=") %>% unlist() %>% .[-1]
+    map_values <- x %>%
+      str_replace(">=", "geq") %>%
+      str_replace("<=", "leq") %>%
+      str_split("[:graph:]+=") %>%
+      unlist() %>% .[-1]
     nvalues <- map_values %>%
       str_extract_all("\\([-]?[:digit:]+\\)") %>%
       unlist() %>%

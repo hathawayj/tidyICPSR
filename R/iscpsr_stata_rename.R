@@ -19,7 +19,7 @@
 #'@param file Stata dictionary file, most often with a \code{.dct} extension.
 #'@param names_to_lower defaults to TRUE.  If TRUE then the column names are changed to
 #' all lower case with `str_to_lower()`.
-#'@author Ananda Mahto
+#'@author Ananda Mahto & J. Hathaway
 #'@references \itemize{ \item Stata data types:
 #'\url{http://www.stata.com/help.cgi?datatypes} \item Stata help for
 #'fixed-format data:
@@ -29,7 +29,7 @@
 #'
 #'## Read an example dictionary file
 #'
-read_dct <- function(file, names_to_lower = TRUE) {
+icpsr_stata_rename <- function(file, names_to_lower = TRUE) {
   # read in the dct file.  It is just an ASCII file.
   temp <- read_lines(file)
   # find the rows that describe the columns
