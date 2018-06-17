@@ -9,7 +9,7 @@ recode_all <- function(dat, y){
   x <- x[x %in% colnames(dat)]
 
   for (i in seq_along(x)){
-    new_values <- recode(ind5[,x[i]][[1]], !!!y[[x[i]]], .default = "missing")
+    new_values <- recode(dat[,x[i]][[1]], !!!y[[x[i]]], .default = "missing")
 
     dat <- dat %>% mutate(!!x[i] := new_values)
 

@@ -69,7 +69,7 @@ icpsr_download <- function(file_id,
     }
 
     if (is.null(email)){
-        icpsr_email <- readline(prompt = "ICPSR requires your user account information.  Please enter your email address: \n")
+        icpsr_email <- readline(prompt = "ICPSR requires your user account information. You can create an account at - http://bit.ly/icpsrlogin.  Please enter your email address: \n")
         options("icpsr_email" = icpsr_email)
         email <- getOption("icpsr_email")
     }

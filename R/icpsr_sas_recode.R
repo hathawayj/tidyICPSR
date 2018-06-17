@@ -6,15 +6,16 @@
 #'
 
 
-#'@param file SAS Proc Format File from ICPSR, with a \code{.sas} extension.
-#'@author J. Hathaway
-#'@references \itemize{ \item SAS data types:
-#'\url{http://support.sas.com/documentation/cdl/en/fedsqlref/67364/HTML/default/viewer.htm#n19bf2z7e9p646n0z224cokuj567.htm}
-#'@examples
+#' @param file SAS Proc Format File from ICPSR, with a \code{.sas} extension.
+#' @param trailing_f sets the number of f's that should be removed from the setup variable names.
+#' @author J. Hathaway
+#' @references \itemize{ \item SAS data types:
+#' \url{http://support.sas.com/documentation/cdl/en/fedsqlref/67364/HTML/default/viewer.htm#n19bf2z7e9p646n0z224cokuj567.htm}
+#' @examples
 #'
 #'## Read an example dictionary file
-#'
-icpsr_sas_recode <- function(file) {
+#' @export
+icpsr_sas_recode <- function(file, trailing_f = 2) {
   # read in the sas file.  It is just an ASCII file.
   temp <- read_lines(file)
 
@@ -56,7 +57,8 @@ icpsr_sas_recode <- function(file) {
     str_extract_all("VALUE [:graph:]+") %>%
     unlist() %>%
     str_replace_all("VALUE", "") %>%
-    str_trim()
+    str_trim() %>%
+    str_remove(str_c("f{", trailing_f, ",}$")) # removes the extra ffff values.  one f stays in data names but more than one does not show up.
 
 
 
