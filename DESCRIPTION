@@ -1,11 +1,24 @@
 Package: tidyICPSR
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A few simple functions to process data from ICPSR into R.
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: J. Hathaway
+Maintainer: <j@jhathaway.io>
+URL: https://github.com/hathawayj/tidyICPSR
+BugReports: https://github.com/hathawayj/tidyICPSR/issues
+Description: The ICPSR <https://www.icpsr.umich.edu/icpsrweb/> has provided a sweeping set of studies with access to clean and
+    standardized data.  This package has a few functions to help process the recoding and variable naming of data.  It mainly uses
+    the default files that ICPSR creates for SAS setup.
+License: MIT + LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 2.14),
+Imports:
+    dplyr,
+    lubridate,
+    stringr,
+    readr,
+    purrr
+Suggests:
+    tidyverse
