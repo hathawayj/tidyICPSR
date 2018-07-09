@@ -1,6 +1,6 @@
 ## tidyICPSR
 
-This is a draft R package that can be used to download and format [ICPSR data]. It can be installed with
+This is a draft R package that can be used to download and format [ICPSR data](https://www.icpsr.umich.edu/icpsrweb/ICPSR/). It can be installed with
 
 ```R
 #install.packages("devtools")

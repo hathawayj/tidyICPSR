@@ -19,6 +19,8 @@ Imports:
     lubridate,
     stringr,
     readr,
-    purrr
+    purrr,
+    fs,
+    utils
 Suggests:
     tidyverse
